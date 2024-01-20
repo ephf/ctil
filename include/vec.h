@@ -30,10 +30,17 @@ typedef struct {
  * size_t vsize(Vec<T> vec);
  * ```
 */
-#define vsize(vec) (vsheader(vec)->size)
+#define vsize(vec) (vheader(vec)->size / sizeof(*vec))
 
 
-Vec vec(size_t capacity);
+Vec nomacro_vec(size_t capacity);
+/**
+ * ```cpp
+ * Vec<T> vec(T, size_t capacity);
+ * ```
+*/
+#define vec(type, capacity) \
+    nomacro_vec(sizeof(type) * capacity)
 
 
 // use `vresize()`
@@ -85,8 +92,11 @@ _Static_assert /* vunshift<T>() */\
 
 int nomacro_vshift(Vec* vec, size_t item_size);
 
-#define vshift(vec, item) \
-    nomacro_vshift((void*) (vec), sizeof(item))
+#define vshift(vec) \
+    nomacro_vshift((void*) (vec), sizeof(**(vec)))
+
+
+void vfree(Vec vec);
 
 
 #endif

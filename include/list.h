@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 
 
 typedef void* List;
@@ -32,6 +33,8 @@ int nomacro_lpush(List* list, void* item, size_t item_size);
 _Static_assert /* lpush<T>() */\
     (_Generic(item, typeof(**(list)): 1, default: 0), "Types for list and item do not match");\
     nomacro_lpush((void*) (list), (void*) &(typeof(item)[]) { item }, sizeof(item)); })
+
+int __compound_lpush(List* list, int n, ...);
 
 
 // use `lpop()`
