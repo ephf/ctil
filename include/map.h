@@ -1,8 +1,8 @@
 #ifndef CTIL_MAP_H
 #define CTIL_MAP_H
 
-#include <list.h>
-#include <vec.h>
+#include "list.h"
+#include "vec.h"
 #include <stdint.h>
 
 

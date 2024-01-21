@@ -66,7 +66,7 @@ void lfree(List list);
  * ```
 */
 #define lnext(list) \
-    ((typeof(list))(void*) (*(void**)(void*) list))
+    (list ? (typeof(list))(void*) (*(void**)(void*) list) : NULL)
 
 
 #define lforeach(list, decl) \
